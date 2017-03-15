@@ -32,6 +32,13 @@ public class GoldListBean {
         public void setUsername(String username) {
             this.username = username;
         }
+
+        @Override
+        public String toString() {
+            return "GoldListUserBean{" +
+                    "username='" + username + '\'' +
+                    '}';
+        }
     }
 
     public static class GoldListScreenshotBean {
@@ -43,6 +50,13 @@ public class GoldListBean {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return "GoldListScreenshotBean{" +
+                    "url='" + url + '\'' +
+                    '}';
         }
     }
 
@@ -108,5 +122,19 @@ public class GoldListBean {
 
     public void setUser(GoldListUserBean user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "GoldListBean{" +
+                "objectId='" + objectId + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", title='" + title + '\'' +
+                ", collectionCount=" + collectionCount +
+                ", commentsCount=" + commentsCount +
+                ", url='" + url + '\'' +
+                ", user=" + user +
+                ", screenshot=" + screenshot +
+                '}';
     }
 }

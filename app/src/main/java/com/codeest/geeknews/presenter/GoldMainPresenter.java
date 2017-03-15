@@ -61,6 +61,7 @@ public class GoldMainPresenter extends RxPresenter<GoldMainContract.View> implem
     }
 
     private void initList() {
+        //生成默认的4个topics
         mList = new RealmList<>();
         mList.add(new GoldManagerItemBean(0, true));
         mList.add(new GoldManagerItemBean(1, true));

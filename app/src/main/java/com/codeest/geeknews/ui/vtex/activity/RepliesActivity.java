@@ -121,11 +121,11 @@ public class RepliesActivity extends BaseActivity<RepliesPresenter> implements R
         switch (id) {
             case R.id.action_like:
                 if(isLiked) {
-                    item.setIcon(R.mipmap.ic_toolbar_like_n);
+                    item.setIcon(R.mipmap.ic_toolbar_dislike);
                     mPresenter.delete(topicId);
                     isLiked = false;
                 } else {
-                    item.setIcon(R.mipmap.ic_toolbar_like_p);
+                    item.setIcon(R.mipmap.ic_toolbar_like);
                     RealmLikeBean bean = new RealmLikeBean();
                     bean.setId(topicId);
                     bean.setImage(mTopBean.getMember().getavatar_normal());
@@ -148,10 +148,10 @@ public class RepliesActivity extends BaseActivity<RepliesPresenter> implements R
 
     private void setLikeState(boolean state) {
         if(state) {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+            menuItem.setIcon(R.mipmap.ic_toolbar_like);
             isLiked = true;
         } else {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+            menuItem.setIcon(R.mipmap.ic_toolbar_dislike);
             isLiked = false;
         }
     }

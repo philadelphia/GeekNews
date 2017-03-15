@@ -62,7 +62,7 @@ public class GoldMainFragment extends BaseFragment<GoldMainPresenter> implements
         fragments.clear();
         mTabLayout.removeAllTabs();
         for (GoldManagerItemBean item : mList) {
-            if (item.getIsSelect()) {
+            if (item.isSelect()) {
                 GoldPagerFragment fragment = new GoldPagerFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.IT_GOLD_TYPE, type[item.getIndex()]);
@@ -75,7 +75,7 @@ public class GoldMainFragment extends BaseFragment<GoldMainPresenter> implements
         GoldPagerAdapter mAdapter = new GoldPagerAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(mAdapter);
         for (GoldManagerItemBean item : mList) {
-            if (item.getIsSelect()) {
+            if (item.isSelect()) {
                 mTabLayout.getTabAt(currentIndex++).setText(typeStr[item.getIndex()]);
             }
         }

@@ -42,7 +42,7 @@ public class TechDetailActivity extends SimpleActivity {
     TextView tvProgress;
 
     RealmHelper mRealmHelper;
-    MenuItem menuItem;
+    MenuItem menuItemLike;
 
     String title,url,imgUrl,id;
     int type;
@@ -122,7 +122,7 @@ public class TechDetailActivity extends SimpleActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tech_meun, menu);
-        menuItem = menu.findItem(R.id.action_like);
+        menuItemLike = menu.findItem(R.id.action_like);
         setLikeState(mRealmHelper.queryLikeId(id));
         return true;
     }
@@ -132,11 +132,11 @@ public class TechDetailActivity extends SimpleActivity {
         switch (id) {
             case R.id.action_like:
                 if(isLiked) {
-                    item.setIcon(R.mipmap.ic_toolbar_like_n);
+                    item.setIcon(R.mipmap.ic_toolbar_dislike);
                     mRealmHelper.deleteLikeBean(this.id);
                     isLiked = false;
                 } else {
-                    item.setIcon(R.mipmap.ic_toolbar_like_p);
+                    item.setIcon(R.mipmap.ic_toolbar_like);
                     RealmLikeBean bean = new RealmLikeBean();
                     bean.setId(this.id);
                     bean.setImage(imgUrl);
@@ -159,10 +159,10 @@ public class TechDetailActivity extends SimpleActivity {
 
     private void setLikeState(boolean state) {
         if(state) {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+            menuItemLike.setIcon(R.mipmap.ic_toolbar_like);
             isLiked = true;
         } else {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+            menuItemLike.setIcon(R.mipmap.ic_toolbar_dislike);
             isLiked = false;
         }
     }

@@ -22,7 +22,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
 
     private static final String RES = "1080*1776";
 
-    private static final int COUNT_DOWN_TIME = 2200;
+    private static final int COUNT_DOWN_TIME = 1000;
 
     private RetrofitHelper mRetrofitHelper;
 
@@ -58,7 +58,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
                     public void call(Long aLong) {
                         mView.jumpToMain();
                     }
-                });
+                });https://news-at.zhihu.com/api/4/start-image/1080*1776
         addSubscrebe(rxSubscription);
     }
 }

@@ -13,7 +13,7 @@ public class GoldManagerItemBean extends RealmObject implements Parcelable {
 
     private int index;
 
-    private boolean isSelect;
+    private boolean select;
 
     public GoldManagerItemBean () {
 
@@ -21,7 +21,7 @@ public class GoldManagerItemBean extends RealmObject implements Parcelable {
 
     public GoldManagerItemBean (int index, boolean isSelect) {
         this.index = index;
-        this.isSelect = isSelect;
+        this.select = isSelect;
     }
 
     public int getIndex() {
@@ -32,12 +32,12 @@ public class GoldManagerItemBean extends RealmObject implements Parcelable {
         this.index = index;
     }
 
-    public boolean getIsSelect() {
-        return isSelect;
+    public boolean isSelect() {
+        return select;
     }
 
     public void setSelect(boolean select) {
-        isSelect = select;
+        this.select = select;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class GoldManagerItemBean extends RealmObject implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.index);
-        dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.select ? (byte) 1 : (byte) 0);
     }
 
     protected GoldManagerItemBean(Parcel in) {
         this.index = in.readInt();
-        this.isSelect = in.readByte() != 0;
+        this.select = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<GoldManagerItemBean> CREATOR = new Parcelable.Creator<GoldManagerItemBean>() {

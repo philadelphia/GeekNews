@@ -3,6 +3,7 @@ package com.codeest.geeknews.ui.gold.adapter;
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,12 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private String mType;
     private boolean mHotFlag = true;
     private OnHotCloseListener onHotCloseListener;
+    private static final String TAG = "GoldListAdapter";
 
-    public enum ITEM_TYPE {
-        ITEM_TITLE,     //标题
-        ITEM_HOT,       //热门
-        ITEM_CONTENT    //内容
+    public static class  ITEM_TYPE {
+        private  static final int ITEM_TITLE = 0x001;    //标题
+        private  static final int ITEM_HOT = 0x002;     //热门
+        private  static final int ITEM_CONTENT = 0x003;   //内容
     }
 
     public GoldListAdapter(Context mContext, List<GoldListBean> mList, String typeStr) {
@@ -51,23 +53,23 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         if (!mHotFlag) {
-            return ITEM_TYPE.ITEM_CONTENT.ordinal();
+            return ITEM_TYPE.ITEM_CONTENT;
         } else {
             if(position == 0) {
-                return ITEM_TYPE.ITEM_TITLE.ordinal();
+                return ITEM_TYPE.ITEM_TITLE;
             } else if (position > 0 && position <= 3){
-                return ITEM_TYPE.ITEM_HOT.ordinal();
+                return ITEM_TYPE.ITEM_HOT;
             } else {
-                return ITEM_TYPE.ITEM_CONTENT.ordinal();
+                return ITEM_TYPE.ITEM_CONTENT;
             }
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == ITEM_TYPE.ITEM_TITLE.ordinal()) {
+        if(viewType == ITEM_TYPE.ITEM_TITLE) {
             return new TitleViewHolder(inflater.inflate(R.layout.item_gold_title, parent, false));
-        } else if(viewType == ITEM_TYPE.ITEM_HOT.ordinal()) {
+        } else if(viewType == ITEM_TYPE.ITEM_HOT) {
             return new HotViewHolder(inflater.inflate(R.layout.item_gold_hot, parent, false));
         }
         return new ContentViewHolder(inflater.inflate(R.layout.item_gold, parent, false));
@@ -76,10 +78,11 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         GoldListBean bean = mList.get(0);
+        Log.i(TAG, "position: " + bean.toString());
         if (position > 0) {
             bean = mList.get(position -1);
         }
-        if (holder instanceof ContentViewHolder) {
+        if (holder instanceof ContentViewHolder) {  //普通内容标签
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
                 ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((ContentViewHolder) holder).ivImg);
             } else {
@@ -91,7 +94,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     bean.getUser().getUsername(),
                     DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt()))));
             holder.itemView.setOnClickListener(new MyOnClickListener(--position));
-        } else if (holder instanceof HotViewHolder) {
+        } else if (holder instanceof HotViewHolder) {   //热门标签
             if (bean.getScreenshot() != null && bean.getScreenshot().getUrl() != null) {
                 ImageLoader.load(mContext, bean.getScreenshot().getUrl(), ((HotViewHolder) holder).ivImg);
             } else {
@@ -102,7 +105,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((HotViewHolder) holder).tvAuthor.setText(String.valueOf(bean.getUser().getUsername()));
             ((HotViewHolder) holder).tvTime.setText(DateUtil.formatDate2String(DateUtil.subStandardTime(bean.getCreatedAt())));
             holder.itemView.setOnClickListener(new MyOnClickListener(--position));
-        } else {
+        } else {    //position == 0,显示Android热门
             ((TitleViewHolder) holder).tvTitle.setText(String.format("%s 热门", mType));
             ((TitleViewHolder) holder).btnClose.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -186,6 +189,7 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @Override
         public void onClick(View view) {
             String imgUrl = null;
+            Log.i(TAG, "onClick: " + mList.get(position).toString());
             if (mList.get(position).getScreenshot() != null && mList.get(position).getScreenshot().getUrl() != null)
                 imgUrl = mList.get(position).getScreenshot().getUrl();
             TechDetailActivity.launch(new TechDetailActivity.Builder()

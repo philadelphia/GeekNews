@@ -40,7 +40,7 @@ public class GoldManagerAdapter extends RecyclerView.Adapter<GoldManagerAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.tvType.setText(typeStr[mList.get(position).getIndex()]);
-        holder.scSwitch.setChecked(mList.get(position).getIsSelect());
+        holder.scSwitch.setChecked(mList.get(position).isSelect());
         holder.scSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

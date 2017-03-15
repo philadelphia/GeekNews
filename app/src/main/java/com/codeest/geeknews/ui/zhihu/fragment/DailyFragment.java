@@ -72,8 +72,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
                 } else {
                     mAdapter.notifyItemChanged(position + 2);
                 }
-                Intent intent = new Intent();
-                intent.setClass(mContext, ZhihuDetailActivity.class);
+                Intent intent = new Intent(mContext,ZhihuDetailActivity.class);
                 intent.putExtra("id",mList.get(position).getId());
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, shareView, "shareView");
                 mContext.startActivity(intent,options.toBundle());

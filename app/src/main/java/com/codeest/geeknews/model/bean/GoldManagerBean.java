@@ -12,11 +12,11 @@ import io.realm.RealmObject;
 
 public class GoldManagerBean extends RealmObject implements Parcelable {
 
+    private RealmList<GoldManagerItemBean> managerList;
+
     public GoldManagerBean() {
 
     }
-
-    private RealmList<GoldManagerItemBean> managerList;
 
     public RealmList<GoldManagerItemBean> getManagerList() {
         return managerList;

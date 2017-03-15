@@ -81,10 +81,10 @@ public class GirlDetailActivity extends SimpleActivity {
         switch (id){
             case R.id.action_like:
                 if(isLiked) {
-                    item.setIcon(R.mipmap.ic_toolbar_like_n);
+                    item.setIcon(R.mipmap.ic_toolbar_dislike);
                     mRealmHelper.deleteLikeBean(this.id);
                 } else {
-                    item.setIcon(R.mipmap.ic_toolbar_like_p);
+                    item.setIcon(R.mipmap.ic_toolbar_like);
                     RealmLikeBean bean = new RealmLikeBean();
                     bean.setId(this.id);
                     bean.setImage(url);
@@ -105,10 +105,10 @@ public class GirlDetailActivity extends SimpleActivity {
 
     private void setLikeState(boolean state) {
         if(state) {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
+            menuItem.setIcon(R.mipmap.ic_toolbar_like);
             isLiked = true;
         } else {
-            menuItem.setIcon(R.mipmap.ic_toolbar_like_n);
+            menuItem.setIcon(R.mipmap.ic_toolbar_dislike);
             isLiked = false;
         }
     }
